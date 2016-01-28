@@ -67,6 +67,7 @@ Game.prototype.result = function(arrayInput, comboInput) {
       if (comboInput[j] === comboIndex[0] || comboInput[j] ===  comboIndex[1] || comboInput[j] ===  comboIndex[2] ) {
         count++;
       } if (count === 3) {
+        console.log("You are the winner");
         return 'You are the winner';
       } else if (comboInput.length >= 5) {
         return "This is a tie!"
@@ -86,7 +87,7 @@ $(function() {
   var markO = playerO.mark;
   var currentGame = new Game();;
   var gameBoard = new Board();
-  var currentPlayer = '';
+  var currentPlayer = playerO;
   var currentMarkDiv = '';
   gameBoard.gridMaker();
 
@@ -108,93 +109,18 @@ function setTurn() {
                              '</div>';
       return currentPlayer && currentMarkDiv;
     }
-  }
-  $('#upperLeft').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[6]);
-    console.log(markedArray);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
+  };
+
+  $('.grid-cell').each(function(index) {
+    $(this).click(function() {
+      $('#welcome').text("It is " + currentPlayer.mark + "'s turn:");
+      setTurn();
+      markedArray.push(gameBoard.grid[index]);
+      console.log(markedArray);
+      $(this).append(currentMarkDiv);
+      $('#final-result').text(currentGame.result(gameBoard.grid, markedArray));
+      currentGame.turnChanger();
+      $(this).unbind("click");
+    });
   });
-
-  $('#upperCenter').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[7]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-  $('#upperRight').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[8]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-  $('#midLeft').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[3]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-  $('#midCenter').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[4]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-  $('#midRight').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[5]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-  $('#lowLeft').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[0]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-  $('#lowCenter').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[1]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-
-  $('#lowRight').click(function() {
-    setTurn();
-    markedArray.push(gameBoard.grid[2]);
-    $(this).append(currentMarkDiv);
-    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
-    currentGame.turnChanger();
-    $(this).unbind("click");
-  });
-
-
-
-
-
-
 });
