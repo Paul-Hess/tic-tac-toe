@@ -1,6 +1,7 @@
 // Creates Player and their mark
 function Player(mark) {
   this.mark = mark
+  this.markedArray = [];
 }
 
 //Creates Space with x and y coordinates.
@@ -60,9 +61,6 @@ Game.prototype.result = function(arrayInput, comboInput) {
   var count = 0;
 
   for (var i = 0; i < combinations.length; i++) {
-    if ((i === 7) && (count !== 3)) {
-      return "This is a tie!";
-    }
     count = 0;
     var comboIndex = combinations[i];
     for (var j = 0; j < comboInput.length; j++) {
@@ -70,6 +68,8 @@ Game.prototype.result = function(arrayInput, comboInput) {
         count++;
       } if (count === 3) {
         return 'You are the winner';
+      } else if (comboInput.length >= 5) {
+        return "This is a tie!"
       }
     }
   };
@@ -95,12 +95,14 @@ $(function() {
 function setTurn() {
   if (currentGame.turn % 2 === 0 ) {
      currentPlayer = playerX;
+     markedArray = playerX.markedArray;
      currentMarkDiv = '<div class="hiddenX">' +
                               '<p>X</p>' +
                             '</div>';
      return currentPlayer && currentMarkDiv;
     } else {
       currentPlayer = playerO;
+      markedArray = playerO.markedArray;
       currentMarkDiv = '<div class="hiddenO">' +
                                '<p>O</p>' +
                              '</div>';
@@ -109,64 +111,73 @@ function setTurn() {
   }
   $('#upperLeft').click(function() {
     setTurn();
-    gameBoard.grid[6].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[6]);
+    console.log(markedArray);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#upperCenter').click(function() {
     setTurn();
-    gameBoard.grid[7].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[7]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#upperRight').click(function() {
     setTurn();
-    gameBoard.grid[8].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[8]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#midLeft').click(function() {
     setTurn();
-    gameBoard.grid[3].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[3]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#midCenter').click(function() {
     setTurn();
-    gameBoard.grid[4].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[4]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#midRight').click(function() {
     setTurn();
-    gameBoard.grid[5].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[5]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#lowLeft').click(function() {
     setTurn();
-    gameBoard.grid[1].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[0]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
 
   $('#lowCenter').click(function() {
     setTurn();
-    gameBoard.grid[2].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[1]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });
@@ -174,8 +185,9 @@ function setTurn() {
 
   $('#lowRight').click(function() {
     setTurn();
-    gameBoard.grid[3].markedBy(currentPlayer);
+    markedArray.push(gameBoard.grid[2]);
     $(this).append(currentMarkDiv);
+    $('#welcome').text(currentGame.result(gameBoard.grid, markedArray));
     currentGame.turnChanger();
     $(this).unbind("click");
   });

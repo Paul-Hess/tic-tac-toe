@@ -2,6 +2,7 @@ describe('Player', function() {
   it('should return the players mark', function() {
     var testPlayer = new Player('X');
     expect(testPlayer.mark).to.equal('X');
+    expect(testPlayer.markedArray).to.eql([]);
   });
 });
 
