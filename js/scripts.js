@@ -112,14 +112,76 @@ function setTurn() {
     gameBoard.grid[6].markedBy(currentPlayer);
     $(this).append(currentMarkDiv);
     currentGame.turnChanger();
+    $(this).unbind("click");
   });
 
   $('#upperCenter').click(function() {
     setTurn();
+    gameBoard.grid[7].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+  $('#upperRight').click(function() {
+    setTurn();
     gameBoard.grid[8].markedBy(currentPlayer);
     $(this).append(currentMarkDiv);
     currentGame.turnChanger();
+    $(this).unbind("click");
   });
+
+  $('#midLeft').click(function() {
+    setTurn();
+    gameBoard.grid[3].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+  $('#midCenter').click(function() {
+    setTurn();
+    gameBoard.grid[4].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+  $('#midRight').click(function() {
+    setTurn();
+    gameBoard.grid[5].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+  $('#lowLeft').click(function() {
+    setTurn();
+    gameBoard.grid[1].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+  $('#lowCenter').click(function() {
+    setTurn();
+    gameBoard.grid[2].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+
+  $('#lowRight').click(function() {
+    setTurn();
+    gameBoard.grid[3].markedBy(currentPlayer);
+    $(this).append(currentMarkDiv);
+    currentGame.turnChanger();
+    $(this).unbind("click");
+  });
+
+
+
 
 
 
